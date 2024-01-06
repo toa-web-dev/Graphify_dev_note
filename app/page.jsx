@@ -1,14 +1,9 @@
-"use client"
-
-import { useEffect } from "react";
-
+"use client";
+import Graph from "./components/Graph.jsx";
 export default function app() {
-    useEffect(() => {
-        console.log("렌더링");
-    }, []);
     return (
         <>
-            <svg width={500} height={500}></svg>
+            <Graph />
         </>
     );
 }
