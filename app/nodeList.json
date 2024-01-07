@@ -1,20 +1,25 @@
 {
-    "id": "자바스크립트",
+    "nodeName": "자바스크립트",
     "title": "자바스크립트를 알아보자",
     "children": [
         {
-            "id": "이벤트",
+            "nodeName": "이벤트",
             "title": "이벤트란?",
             "children": [
                 {
-                    "id": "스로틀",
+                    "nodeName": "스로틀",
                     "title": "밸브를 조여서 흐름을 조절하는 스로틀"
                 },
                 {
-                    "id": "디바운스",
+                    "nodeName": "디바운스",
                     "title": "한번에 모아서 보내봐! 디바운스"
                 }
             ]
+        },
+        {
+            "nodeName": "콜 스택",
+            "title": "JS의 함수 동작원리",
+            "children": null
         }
     ]
 }
