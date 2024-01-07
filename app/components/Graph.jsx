@@ -1,19 +1,14 @@
 "use client";
 
+import nodeList from "../nodeList.json";
+import { getTreeHierarchy, nodes, links } from "../util/getTreeHierarchy.jsx";
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
 export default function Graph() {
     const svgRef = useRef();
-    const nodes = [{ id: "A" }, { id: "B" }, { id: "C" }, { id: "D" }, { id: "E" }, { id: "F" }, { id: "G" }];
-    const links = [
-        { source: "A", target: "B" },
-        { source: "A", target: "C" },
-        { source: "A", target: "D" },
-        { source: "E", target: "F" },
-        { source: "E", target: "G" },
-    ];
     useEffect(() => {
+        getTreeHierarchy(nodeList);
         const width = 1000;
         const height = 600;
         const svg = d3
@@ -26,20 +21,20 @@ export default function Graph() {
             .data(nodes)
             .join("g")
             .each(function (d) {
-                d3.select(this).append("circle").attr("r", 6).attr("fill", "skyblue").attr("r", 10);
+                d3.select(this).append("circle").attr("r", "1rem").attr("fill", "skyblue")
                 d3.select(this)
                     .append("text")
-                    .text((d) => d.id)
-                    .attr("x", -5)
+                    .text((d) => d.nodeName)
+                    .attr("x", "-2rem")
                     .attr("y", 5);
             });
         const simulation = d3
             .forceSimulation(nodes)
             .force(
                 "link",
-                d3.forceLink(links).id((d) => d.id)
+                d3.forceLink(links).id((d) => d.nodeName)
             )
-            .force("charge", d3.forceManyBody().strength(-100))
+            .force("charge", d3.forceManyBody().strength(-500))
             .force("center", d3.forceCenter(width / 2, height / 2))
             .on("tick", () => {
                 link.attr("x1", (d) => d.source.x)
