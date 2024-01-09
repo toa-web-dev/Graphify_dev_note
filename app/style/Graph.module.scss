@@ -1,0 +1,23 @@
+@import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
+.svg_graph {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    & line {
+        stroke: black;
+        stroke-width: 1px;
+    }
+    & g {
+        & circle {
+            r: 1.6rem;
+            fill: #fbf9f1;
+        }
+        & text {
+            font-family: "WantedSansVariable", sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+    }
+}
