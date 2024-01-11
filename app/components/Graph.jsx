@@ -17,11 +17,34 @@ export default function Graph() {
             .data(nodes)
             .join("g")
             .each(function (d) {
+                d3.select(this)
+                    .append("title")
+                    .text((d) => d.title);
                 d3.select(this).append("circle");
                 d3.select(this)
                     .append("text")
+                    .attr("class", `${styles.node_name}`)
                     .text((d) => d.nodeName);
-            });
+            })
+            .call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
+
+        // 노드 드래그 이벤트 핸들러 함수들
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
 
         const svgWidth = svgRef.current.clientWidth;
         const svgHeight = svgRef.current.clientHeight;
@@ -40,6 +63,6 @@ export default function Graph() {
                     .attr("y2", (d) => d.target.y);
                 node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
             });
-    }, [nodes, links]);
+    }, []);
     return <svg ref={svgRef} className={styles.svg_graph} />;
 }
