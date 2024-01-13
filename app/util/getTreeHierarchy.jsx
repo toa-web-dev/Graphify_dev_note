@@ -9,5 +9,6 @@ export function getTreeHierarchy(node) {
             getTreeHierarchy(child);
         }
     }
+    console.log(nodes, "links: ",links);
 }
 export { nodes, links };

@@ -1,6 +1,7 @@
 "use client";
 
 import nodeList from "../nodeList.json";
+import { useRouter } from "next/navigation";
 import { getTreeHierarchy, nodes, links } from "../util/getTreeHierarchy.jsx";
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
@@ -8,6 +9,7 @@ import styles from "../style/Graph.module.scss";
 
 export default function Graph() {
     const svgRef = useRef();
+    const router = useRouter();
     useEffect(() => {
         getTreeHierarchy(nodeList);
         const svg = d3.select(svgRef.current);
@@ -17,6 +19,7 @@ export default function Graph() {
             .data(nodes)
             .join("g")
             .each(function (d) {
+                d3.select(this).attr("class", `${styles.node}`).on("click", clicked);
                 d3.select(this)
                     .append("title")
                     .text((d) => d.title);
@@ -29,6 +32,7 @@ export default function Graph() {
             .call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
 
         // 노드 드래그 이벤트 핸들러 함수들
+        // Lerp 적용 고민 중
         function dragstarted(event, d) {
             if (!event.active) simulation.alphaTarget(0.3).restart();
             d.fx = d.x;
@@ -44,6 +48,10 @@ export default function Graph() {
             if (!event.active) simulation.alphaTarget(0);
             d.fx = null;
             d.fy = null;
+        }
+
+        function clicked(event, d) {
+            router.push(`/article/${d.title}`);
         }
 
         const svgWidth = svgRef.current.clientWidth;
