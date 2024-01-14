@@ -18,7 +18,6 @@ export default function Graph() {
         })();
     }, []);
     useEffect(() => {
-        console.log(graphData);
         if (graphData) {
             const { nodes, links } = graphData;
             const svg = d3.select(svgRef.current);
@@ -60,7 +59,7 @@ export default function Graph() {
             function clicked(event, d) {
                 if (d.title) router.push(`/article/${d.title}`);
             }
-            
+
             const svgWidth = svgRef.current.clientWidth;
             const svgHeight = svgRef.current.clientHeight;
             const simulation = d3
