@@ -1,0 +1,8 @@
+[
+    { "label": "자바스크립트", "title": null, "target_array": ["최적화", "리액트", "프레임워크"] },
+    { "label": "Next JS", "title": "NextJS의 14버전을 사용하는 사람들을 위한 설명", "target_array": null },
+    { "label": "프레임워크", "title": null, "target_array": ["Next JS"] },
+    { "label": "최적화", "title": null, "target_array": ["스로틀"] },
+    { "label": "리액트", "title": null, "target_array": null },
+    { "label": "스로틀", "title": "이벤트를 최적화 하는 스로틀", "target_array": null }
+]
