@@ -1,9 +1,11 @@
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const anonKey = process.env.NEXT_PUBLIC_API_KEY;
 
-export async function fetchGraphData() {
+export async function fetchData(uri, queryString) {
     try {
-        const response = await fetch(`${apiUrl}/graph_view`, {
+        let URL = `${apiUrl}/${uri}`;
+        if (queryString) URL = URL + `?label_fk=eq.${queryString}`;
+        const response = await fetch(URL, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
