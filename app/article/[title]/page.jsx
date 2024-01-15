@@ -1,21 +1,30 @@
 "use client";
-import { useParams } from "next/navigation";
+// import data from "@/app/util/article.json";
+import { fetchData } from "@/app/util/fetchData.js";
 import styles from "@/app/style/Article.module.scss";
+import { useEffect, useState } from "react";
 
-export default function article() {
-
-    // 메인페이지의 노드를 클릭하면 해당 글의 정보를 파라미터로 전달받아 게시글을 렌더링 함
-    const params = useParams();
-    const title = decodeURIComponent(params.title);
-    const Content = () => {
-        // return <div dangerouslySetInnerHTML={{ __html: articleData.content }} />;
+export default function Article() {
+    const [articleData, setArticleData] = useState(null);
+    useEffect(() => {
+        (async () => {
+            const data = await fetchData("article", "스로틀");
+            setArticleData(...data);
+        })();
+    }, []);
+    const Contents = () => {
+        return <div dangerouslySetInnerHTML={{ __html: articleData.contents }} />;
     };
     return (
         <>
             <main className={styles.page}>
                 <article>
-                    {/* <h1>{title}</h1> */}
-                    <Content></Content>
+                    {articleData && (
+                        <>
+                            <h1>{articleData.title}</h1>
+                            <Contents></Contents>
+                        </>
+                    )}
                 </article>
             </main>
         </>
