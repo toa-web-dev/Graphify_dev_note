@@ -1,11 +1,9 @@
 .page {
-  width: 90vw;
-  min-height:95vh;
-  margin: auto;
-  margin-top: 5vh;
-  padding: 2rem;
-  background-color: #FAEED1;
-  & h1 {
-    padding: 1rem;
-  }
+    max-width: 100vw;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: snow;
+    & h1 {
+        padding: 1rem;
+    }
 }

@@ -21,8 +21,9 @@ body {
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+    /* color: inherit; */
+    /* text-decoration: none; */
+    padding: 0 4px;
 }
 
 @media (prefers-color-scheme: dark) {
