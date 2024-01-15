@@ -3,12 +3,13 @@
 import { fetchData } from "@/app/util/fetchData.js";
 import styles from "@/app/style/Article.module.scss";
 import { useEffect, useState } from "react";
-
+import { useParams } from "next/navigation";
 export default function Article() {
+    const param = useParams();
     const [articleData, setArticleData] = useState(null);
     useEffect(() => {
         (async () => {
-            const data = await fetchData("article", "스로틀");
+            const data = await fetchData("article", param.label);
             setArticleData(...data);
         })();
     }, []);
