@@ -57,11 +57,13 @@ export default function Graph() {
                 d.fy = null;
             }
             function clicked(event, d) {
-                if (d.title) router.push(`/article/${d.title}`);
+                //게시글 제목을 URL로 할때 공백이 %20으로 변환되므로 공백을 _(언더바)로 변환하기
+                if (d.title) router.push(`/article/${d.label}/${d.title}`);
             }
 
             const svgWidth = svgRef.current.clientWidth;
             const svgHeight = svgRef.current.clientHeight;
+            //screen 크기가 변할때 리렌더링돼서 그래프의 중앙을 화면의 중앙에 오도록 동적으로 변경
             const simulation = d3
                 .forceSimulation(nodes)
                 .force(
