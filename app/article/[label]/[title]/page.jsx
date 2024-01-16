@@ -1,6 +1,6 @@
 "use client";
-// import data from "@/app/util/article.json";
-import { fetchData } from "@/app/util/fetchData.js";
+import data from "@/app/util/article.json";
+// import { fetchData } from "@/app/util/fetchData.js";
 import styles from "@/app/style/Article.module.scss";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -9,7 +9,7 @@ export default function Article() {
     const [articleData, setArticleData] = useState(null);
     useEffect(() => {
         (async () => {
-            const data = await fetchData("article", param.label);
+            // const data = await fetchData("article", param.label);
             setArticleData(...data);
         })();
     }, []);
