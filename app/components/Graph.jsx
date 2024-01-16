@@ -9,14 +9,32 @@ import styles from "../style/Graph.module.scss";
 export default function Graph() {
     const svgRef = useRef();
     const router = useRouter();
-
     const [graphData, setGraphData] = useState(null);
+    const [svgScale, setSvgScale] = useState(1);
     useEffect(() => {
         (async () => {
             const { nodes, links } = await getGraphStructure();
             setGraphData({ nodes, links });
         })();
+        window.addEventListener(
+            "wheel",
+            (e) => {
+                e.preventDefault();
+                console.log("스크롤 감지:", e.deltaY);
+                let alpha;
+                if (e.deltaY < 0) alpha = 1.1;
+                else alpha = 0.9;
+                setSvgScale((prev) => prev * alpha);
+            },
+            { passive: false }
+        );
     }, []);
+
+    useEffect(() => {
+        console.log(svgScale);
+        svgRef.current.style.scale = `${svgScale}`;
+    }, [svgScale]);
+
     useEffect(() => {
         if (graphData) {
             const { nodes, links } = graphData;
@@ -41,7 +59,6 @@ export default function Graph() {
                 })
                 .call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
             // 노드 드래그 이벤트 핸들러 함수들
-            // Lerp 적용 고민 중
             function dragstarted(event, d) {
                 if (!event.active) simulation.alphaTarget(0.3).restart();
                 d.fx = d.x;
@@ -60,7 +77,6 @@ export default function Graph() {
                 //게시글 제목을 URL로 할때 공백이 %20으로 변환되므로 공백을 _(언더바)로 변환하기
                 if (d.title) router.push(`/article/${d.label}/${d.title}`);
             }
-
             const svgWidth = svgRef.current.clientWidth;
             const svgHeight = svgRef.current.clientHeight;
             //screen 크기가 변할때 리렌더링돼서 그래프의 중앙을 화면의 중앙에 오도록 동적으로 변경
@@ -70,7 +86,7 @@ export default function Graph() {
                     "link",
                     d3.forceLink(links).id((d) => d.label)
                 )
-                .force("charge", d3.forceManyBody().strength(-500))
+                .force("charge", d3.forceManyBody().strength(-200))
                 .force("center", d3.forceCenter(svgWidth / 2, svgHeight / 2))
                 .on("tick", () => {
                     link.attr("x1", (d) => d.source.x)
