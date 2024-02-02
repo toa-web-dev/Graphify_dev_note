@@ -1,9 +1,9 @@
 // import { fetchdata } from "../util/fetchGraphdata.js";
 import data from "../util/nodeList.json";
-const nodes = [];
-const links = [];
 
 export async function getGraphStructure() {
+    const nodes = [];
+    const links = [];
     // const data = await fetchdata("graph_view");
     for (const node of data) {
         nodes.push({ id: node.id, label: node.label });
