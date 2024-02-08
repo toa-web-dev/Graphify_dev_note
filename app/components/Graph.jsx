@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { getGraphStructure } from "../util/getGraphStructure.jsx";
+import { getGraphStructure } from "../util/getGraphStructure.js";
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import styles from "../style/Graph.module.scss";
@@ -10,20 +10,23 @@ export default function Graph() {
     const svgRef = useRef();
     const router = useRouter();
     const [fetchData, setFetchData] = useState(null);
+
     useEffect(() => {
+        // 컴포넌트가 렌더링 될때마다 fetchData의 값이 중복되며 추가되는 버그 발생 중
+        //try catch
         (async () => {
             const { nodes, links } = await getGraphStructure();
             setFetchData({ nodes, links });
         })();
     }, []);
+
     useEffect(() => {
         if (fetchData) {
             const { nodes, links } = fetchData;
-            console.log(nodes, links);
             const svg = d3.select(svgRef.current);
-            const box = svg.append("g");
-            const link = box.selectAll("line").data(links).join("line");
-            const node = box
+            const container = svg.append("g");
+            const link = container.selectAll("line").data(links).join("line");
+            const node = container
                 .selectAll("g")
                 .data(nodes)
                 .join("g")
@@ -33,7 +36,7 @@ export default function Graph() {
                     d3.select(this)
                         .append("text")
                         .attr("class", `${styles.label}`)
-                        .attr("y", 30)
+                        .attr("y", 35)
                         .text((d) => d.label);
                 });
 
@@ -43,14 +46,13 @@ export default function Graph() {
                     .zoom()
                     .scaleExtent([0.5, 1.5])
                     .on("zoom", (e) => {
-                        box.attr("transform", e.transform);
+                        container.attr("transform", e.transform);
                     })
             );
+
             node.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
-            node.on("click", clicked);
-            // 노드 드래그 이벤트 핸들러 함수들
             function dragstarted(event, d) {
-                if (!event.active) simulation.alphaTarget(0.3).restart();
+                // if (!event.active) simulation.alphaTarget(0.3).restart();
                 d.fx = d.x;
                 d.fy = d.y;
             }
@@ -59,13 +61,14 @@ export default function Graph() {
                 d.fy = event.y;
             }
             function dragended(event, d) {
-                if (!event.active) simulation.alphaTarget(0);
+                // if (!event.active) simulation.alphaTarget(0);
                 d.fx = null;
                 d.fy = null;
             }
+            node.on("click", clicked);
             function clicked(event, d) {
                 //게시글 제목을 URL로 할때 공백이 %20으로 변환되므로 공백을 _(언더바)로 변환하기
-                if (d.title) router.push(`/article/${d.label}/${d.title}`);
+                router.push(`/post/${d.label}`);
             }
 
             const svgWidth = svgRef.current.clientWidth;
