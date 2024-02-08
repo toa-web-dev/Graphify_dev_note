@@ -11,13 +11,15 @@
         cursor: pointer;
         & circle {
             r: 1rem;
-            fill: #fbf9f1;
+            fill: var(--node-color);
         }
         & text.label {
             font-family: "WantedSansVariable", sans-serif;
             font-weight: 500;
             font-size: 1.1rem;
             text-anchor: middle;
+            fill: var(--label-color);
+            letter-spacing: 0.1rem;
         }
     }
 }
