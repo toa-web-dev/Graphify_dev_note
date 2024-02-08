@@ -1,6 +1,0 @@
-[
-    { "id": 1, "label": "Javascript", "target_array": [3, 4] },
-    { "id": 2, "label": "Next JS", "target_array": null },
-    { "id": 3, "label": "프레임워크", "target_array": [2] },
-    { "id": 4, "label": "최적화", "target_array": null }
-]
