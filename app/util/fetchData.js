@@ -1,10 +1,10 @@
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const anonKey = process.env.NEXT_PUBLIC_API_KEY;
 
-export async function fetchData(uri, queryString) {
+export async function fetchData(path, queryString = null) {
     try {
-        let URL = `${apiUrl}/${uri}`;
-        if (queryString) URL = URL + `?label_fk=eq.${queryString}`;
+        let URL = `${apiUrl}/${path}`;
+        if (queryString) URL += queryString;
         const response = await fetch(URL, {
             method: "GET",
             headers: {
