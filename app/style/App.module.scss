@@ -1,10 +1,11 @@
 .guide {
-  position: fixed;
-  font-size: 1.5rem;
-  left: 50%;
-  bottom: 15%;
-  transform: translateX(-50%);
-  color: white;
-  opacity: 0.8;
-  text-shadow: 1px 1px gray;
+    position: fixed;
+    font-size: 1.5rem;
+    left: 50%;
+    bottom: 15%;
+    transform: translateX(-50%);
+    color: white;
+    opacity: 0.8;
+    text-shadow: 1px 1px gray;
+    text-wrap: nowrap;
 }
