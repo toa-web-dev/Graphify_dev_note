@@ -1,6 +1,8 @@
 :root {
     --body-bg: #1d2b53;
-    --node-color: #eff396;
+    --node-complete-color: rgb(30, 205, 30);
+    --node-draft-color: rgb(255, 243, 110);
+    --node-pending-color: rgba(224, 224, 224, 0.995);
     --label-color: snow;
 }
 
@@ -10,8 +12,10 @@
 
 html,
 body {
-    min-width: 100vw;
-    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
     overflow-x: hidden;
 }
 
@@ -22,7 +26,7 @@ body {
 
 a {
     /* color: inherit; */
-    /* text-decoration: none; */
+    text-decoration: none;
     /* padding: 0 4px; */
 }
 

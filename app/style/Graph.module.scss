@@ -9,9 +9,18 @@
     }
     & g.node {
         cursor: pointer;
-        & circle {
+        & circle.complete {
             r: 1rem;
-            fill: var(--node-color);
+            fill: var(--node-complete-color);
+        }
+        & circle.draft {
+            r: 0.9rem;
+            fill: var(--node-draft-color);
+        }
+        & circle.pending {
+            r: 0.8rem;
+            fill: var(--node-pending-color);
+            filter: blur(0.5px);
         }
         & text.label {
             font-family: "WantedSansVariable", sans-serif;
