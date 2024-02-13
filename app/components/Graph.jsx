@@ -5,6 +5,7 @@ import { getGraphStructure } from "../util/getGraphStructure.js";
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import styles from "../style/Graph.module.scss";
+import { spaceToUnderscore } from "../util/replaceEncodeUrl.js";
 
 export default function Graph() {
     const svgRef = useRef();
@@ -15,8 +16,7 @@ export default function Graph() {
         // 컴포넌트가 렌더링 될때마다 fetchData의 값이 중복되며 추가되는 버그 발생 중
         //try catch
         (async () => {
-            const { nodes, links } = await getGraphStructure();
-            setFetchData({ nodes, links });
+            setFetchData(await getGraphStructure());
         })();
     }, []);
 
@@ -26,13 +26,18 @@ export default function Graph() {
             const svg = d3.select(svgRef.current);
             const container = svg.append("g");
             const link = container.selectAll("line").data(links).join("line");
+            let circleStyle;
             const node = container
                 .selectAll("g")
                 .data(nodes)
                 .join("g")
-                .each(function () {
+                .each(function (d) {
+                    if (d.isCompleted) circleStyle = `${styles.complete}`;
+                    else if (d.isCompleted === false) circleStyle = `${styles.draft}`;
+                    else circleStyle = `${styles.pending}`;
+
                     d3.select(this).attr("class", `${styles.node}`);
-                    d3.select(this).append("circle");
+                    d3.select(this).append("circle").attr("class", circleStyle);
                     d3.select(this)
                         .append("text")
                         .attr("class", `${styles.label}`)
@@ -52,7 +57,7 @@ export default function Graph() {
 
             node.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
             function dragstarted(event, d) {
-                // if (!event.active) simulation.alphaTarget(0.3).restart();
+                if (!event.active) simulation.alphaTarget(0.3).restart();
                 d.fx = d.x;
                 d.fy = d.y;
             }
@@ -61,14 +66,15 @@ export default function Graph() {
                 d.fy = event.y;
             }
             function dragended(event, d) {
-                // if (!event.active) simulation.alphaTarget(0);
+                if (!event.active) simulation.alphaTarget(0);
                 d.fx = null;
                 d.fy = null;
             }
             node.on("click", clicked);
             function clicked(event, d) {
                 //게시글 제목을 URL로 할때 공백이 %20으로 변환되므로 공백을 _(언더바)로 변환하기
-                router.push(`/post/${d.label}`);
+                const path = spaceToUnderscore(d.label);
+                router.push(`/post/${path}`);
             }
 
             const svgWidth = svgRef.current.clientWidth;
