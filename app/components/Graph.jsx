@@ -11,17 +11,15 @@ export default function Graph() {
     const svgRef = useRef();
     const router = useRouter();
     const [fetchData, setFetchData] = useState(null);
-
     useEffect(() => {
-        // 컴포넌트가 렌더링 될때마다 fetchData의 값이 중복되며 추가되는 버그 발생 중
-        //try catch
-        (async () => {
-            setFetchData(await getGraphStructure());
-        })();
+        if (!fetchData) {
+            (async () => {
+                setFetchData(await getGraphStructure());
+            })();
+        }
     }, []);
-
     useEffect(() => {
-        if (fetchData) {
+        if (fetchData && svgRef.current.children.length === 0) {
             const { nodes, links } = fetchData;
             const svg = d3.select(svgRef.current);
             const container = svg.append("g");
