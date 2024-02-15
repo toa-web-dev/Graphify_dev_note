@@ -10,11 +10,11 @@
     & g.node {
         cursor: pointer;
         & circle.complete {
-            r: 1rem;
+            r: 0.8rem;
             fill: var(--node-complete-color);
         }
         & circle.draft {
-            r: 0.9rem;
+            r: 0.8rem;
             fill: var(--node-draft-color);
         }
         & circle.pending {
@@ -28,7 +28,7 @@
             font-size: 1.1rem;
             text-anchor: middle;
             fill: var(--label-color);
-            letter-spacing: 0.1rem;
+            word-spacing: -0.2rem;
         }
     }
 }
