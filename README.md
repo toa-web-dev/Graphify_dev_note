@@ -1,36 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Graphify dev note
 
-## Getting Started
+## 목차
+- [배포 링크](#배포-링크)
+- [무슨 프로젝트인가요](#무슨-프로젝트인가요)
+- [작동 원리](#작동-원리)
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 개요
+- 배포 링크: https://graphify-dev-note.vercel.app/
+- 사용 스택: Next 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 무슨 프로젝트인가요
+**Graphify dev note**는 여러 문서의 관계를 시각화하는 학습 툴 프로젝트입니다. 학습한 지식을 네트워크 그래프로 시각화하여 추상적인 개념 사이의 연관성을 시각적으로 볼 수 있어 통상의 블로깅 방식이나 폴더 디렉토리 구조에 문서를 저장하는 경우보다 개념을 확인하고 응용하기에 용이합니다.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 작동 원리 
+supabase로 구축한 DB서버에서 응답받은 데이터에서 노드와 간선 데이터를 추출한 뒤, d3 라이브러리를 사용해 네트워크 그래프를 그립니다. 노드를 클릭하면 해당 주제의 게시글을 확인할 수 있으며 본문의 데이터는 데이터베이스에 마크다운 문자열로 저장되어 있으며 unified 생태계의 라이브러리와 플러그인을 사용해 마크다운을 HTML로 변환하여 렌더링합니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
