@@ -19,16 +19,20 @@ export default function Article() {
             setPostContent(...data);
         })();
     }, []);
-
     return (
         <>
             {postContent && (
                 <main className={styles.page}>
-                    <Link href="/">←</Link>
+                    <Link href="/">←🏠</Link>
                     {postContent.is_completed ? null : <div>아직 작성중인 글입니다.</div>}
                     <article>
-                        <div>{postContent.createdAt}</div>
-                        <MarkdownRenderer content={postContent.content} />
+                        <h1 className={styles.title}>{postContent.title}</h1>
+                        <div className={styles.createdAt}>{postContent.createdAt}</div>
+                        <MarkdownRenderer
+                            className={styles.contents}
+                            createdAt={postContent.createdAt}
+                            content={postContent.content}
+                        />
                     </article>
                 </main>
             )}
