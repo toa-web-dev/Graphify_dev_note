@@ -8,17 +8,19 @@
 
 <br/>
 
+## 배포 링크: https://graphify-dev-note.vercel.app/
 <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/9b6eb21f-d211-4bbc-a7e6-4ff6cce39fb7" width="750" height="100%"/>
 
-## 배포 링크: https://graphify-dev-note.vercel.app/
 
+<br/>
 <br/>
 
 ## 💎기술 스택 
 
-| Next.js | React |  D3 |  SCSS |   unified | supabase |
+| Next.js | React |  SCSS | D3.js | unified | supabase |
 | :----: |:----: |:----: | :----: |:----: |:----: |
-| <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/fdfc0fcc-5185-4879-938f-cf095b670508" width="60" height="60"/> | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/0aa18d3e-4f03-43ec-8d25-677bf5cda86f" width="60" height="60"/> | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/899f01d6-8f9f-4781-97c2-72e0bfd070e2" width="60" height="60"/> | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/db7bfd62-a83d-4869-b117-b9f31f29f110" width="60" height="60"/> | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/bc3dba67-c6c5-4185-9970-e100a7d66e72" width="60" height="60"/>| <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/350b34d9-94d2-4b07-9aba-902a66d2549d" width="60" height="60"/>
+| <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/fdfc0fcc-5185-4879-938f-cf095b670508" width="60" height="60"/> | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/0aa18d3e-4f03-43ec-8d25-677bf5cda86f" width="60" height="60"/> |  <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/db7bfd62-a83d-4869-b117-b9f31f29f110" width="60" height="60"/> |<img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/899f01d6-8f9f-4781-97c2-72e0bfd070e2" width="60" height="60"/> | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/bc3dba67-c6c5-4185-9970-e100a7d66e72" width="60" height="60"/>| <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/350b34d9-94d2-4b07-9aba-902a66d2549d" width="60" height="60"/>
+|-|-|-| 그래프 라이브러리 |텍스트처리 라이브러리 |백엔드 DB 구축 |
 
 <!-- <img src="" width="60" height="60"/> -->
 
