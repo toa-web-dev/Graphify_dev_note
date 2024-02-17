@@ -8,14 +8,14 @@
 
 <br/>
 
-## 배포 링크: https://graphify-dev-note.vercel.app/
+## 🔗 배포 링크: https://graphify-dev-note.vercel.app/
 <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/9b6eb21f-d211-4bbc-a7e6-4ff6cce39fb7" width="750" height="100%"/>
 
 
 <br/>
 <br/>
 
-## 💎기술 스택 
+## 💎 기술 스택 
 
 | Next.js | React |  SCSS | D3.js | unified | supabase |
 | :----: |:----: |:----: | :----: |:----: |:----: |
@@ -26,12 +26,12 @@
 
 <br/>
 
-## 무슨 프로젝트인가요
+## ❓ 무슨 프로젝트인가요
 **Graphify dev note**는 여러 문서의 관계를 시각화하는 학습 툴 프로젝트입니다. 학습한 지식을 **네트워크 그래프**로 나타내어 추상적인 개념 사이의 연관성을 시각적으로 볼 수 있기 때문에, 통상의 블로깅 방식이나 폴더 디렉터리 구조에 문서를 저장하는 경우보다 개념을 확인하고 응용하기 쉽습니다.
 
 <br/>
 
-## 기능
+## 🛠️ 기능
  1. #### 현재
  - DB에 데이터를 입력하면 클라이언트에서 네트워크 그래프를 렌더링합니다.
  - 네트워크 그래프의 노드는
