@@ -14,11 +14,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 
 :root {
-    --body-bg: #1d2b53;
-    --node-complete-color: rgb(146, 235, 146);
+    --body-bg: #e7efeb;
+    --node-complete-color: #0cca6e;
     --node-draft-color: rgb(255, 243, 110);
-    --node-pending-color: rgba(224, 224, 224, 0.995);
-    --label-color: snow;
+    --node-pending-color: rgba(247, 247, 247, 0.995);
+    --node-stroke-color: gray;
+    --link-stroke-color:gray;
+    --label-color: black;
     --code-color: #f5f2f0;
     --post-title-size: 2.5rem;
 }

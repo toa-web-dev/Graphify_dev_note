@@ -1,12 +1,15 @@
 .guide {
     position: fixed;
-    font-size: 1.3rem;
-    left: 50%;
-    bottom: 10%;
-    transform: translateX(-50%);
+    padding-right: 1rem;
+    font-size: 1.1rem;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 1rem;
     color: var(--label-color);
-    opacity: 0.8;
-    text-shadow: 1px 1px black;
     text-wrap: nowrap;
-    line-height: 2.5rem;
+    line-height: 2rem;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    & ul {
+        list-style-type: none;
+    }
 }

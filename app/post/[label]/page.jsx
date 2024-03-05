@@ -23,9 +23,11 @@ export default function Article() {
         <>
             {postContent && (
                 <main className={styles.page}>
-                    <Link href="/">←🏠</Link>
-                    {postContent.is_completed ? null : <div>아직 작성중인 글입니다.</div>}
+                    <div className={styles.btn_home}>
+                        <Link href="/">← 뒤로가기</Link>
+                    </div>
                     <article>
+                        {postContent.is_completed ? null : <div>아직 작성중인 글입니다.</div>}
                         <h1 className={styles.title}>{postContent.title}</h1>
                         <div className={styles.createdAt}>{postContent.createdAt}</div>
                         <MarkdownRenderer
