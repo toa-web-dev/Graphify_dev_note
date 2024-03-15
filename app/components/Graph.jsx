@@ -7,6 +7,8 @@ import * as d3 from "d3";
 import styles from "../style/Graph.module.scss";
 import { spaceToUnderscore } from "../util/replaceEncodeUrl.js";
 
+const ALPHA_DECAY = 0.09
+
 export default function Graph() {
     const svgRef = useRef();
     const router = useRouter();
@@ -68,6 +70,7 @@ export default function Graph() {
                 d.fx = null;
                 d.fy = null;
             }
+
             node.on("click", clicked);
             function clicked(event, d) {
                 //게시글 제목을 URL로 할때 공백이 %20으로 변환되므로 공백을 _(언더바)로 변환하기
@@ -86,8 +89,9 @@ export default function Graph() {
                         .id((d) => d.id)
                         .distance(100)
                 )
-                .force("charge", d3.forceManyBody().strength(-30))
+                .force("charge", d3.forceManyBody().strength(-100).distanceMax(160))
                 .force("center", d3.forceCenter(svgWidth / 2, svgHeight / 2))
+                .alphaDecay(ALPHA_DECAY)
                 .on("tick", () => {
                     link.attr("x1", (d) => d.source.x)
                         .attr("y1", (d) => d.source.y)
