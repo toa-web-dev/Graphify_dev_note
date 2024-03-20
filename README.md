@@ -12,7 +12,9 @@
 그래프와 게시글의 데이터는 `supabase`로 벡엔드를 구축하고 통신했습니다.
 
 ### 🔗배포 링크: https://graphify-dev-note.vercel.app/
-<img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/9b6eb21f-d211-4bbc-a7e6-4ff6cce39fb7" width="750" height="100%"/>
+<img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/6d5c60fe-6fd6-46cc-9be1-8f8a34643e18" width="750" height="100%"/>
+
+![](https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/8305b150-11e6-44b2-bc10-c6b3569cb778)
 
 <br/>
 <br/>
