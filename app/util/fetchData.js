@@ -7,7 +7,6 @@ export async function fetchData(path, queryString = null) {
         if (queryString) URL += queryString;
         const response = await fetch(URL, {
             cache: "force-cache",
-            next: { revalidate: false },
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
