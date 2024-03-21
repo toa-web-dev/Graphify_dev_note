@@ -9,20 +9,12 @@ import { spaceToUnderscore } from "../util/replaceEncodeUrl.js";
 
 const ALPHA_DECAY = 0.09
 
-export default function Graph() {
+export default function Graph({graphData}) {
     const svgRef = useRef();
     const router = useRouter();
-    const [fetchData, setFetchData] = useState(null);
     useEffect(() => {
-        if (!fetchData) {
-            (async () => {
-                setFetchData(await getGraphStructure());
-            })();
-        }
-    }, []);
-    useEffect(() => {
-        if (fetchData && svgRef.current.children.length === 0) {
-            const { nodes, links } = fetchData;
+        if (svgRef.current.children.length === 0) {
+            const { nodes, links } = graphData
             const svg = d3.select(svgRef.current);
             const container = svg.append("g");
             const link = container.selectAll("line").data(links).join("line");
@@ -100,7 +92,7 @@ export default function Graph() {
                     node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
                 });
         }
-    }, [fetchData]);
+    }, []);
 
     return <svg ref={svgRef} className={styles.svg_graph} />;
 }
