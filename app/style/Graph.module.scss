@@ -3,34 +3,26 @@
     position: absolute;
     width: 100vw;
     height: 100vh;
-    & line {
-        stroke: var(--link-stroke-color);
-        stroke-width: 2px;
-    }
-    & g.node {
-        cursor: pointer;
-        & circle {
-            stroke: var(--node-stroke-color);
-            &.complete {
-                r: 1rem;
-                fill: var(--node-complete-color);
-            }
-            &.draft {
-                r: 0.9em;
-                fill: var(--node-draft-color);
-            }
-            &.pending {
-                r: 0.9rem;
-                fill: var(--node-pending-color);
-            }
+    & g.container {
+        & line {
+            stroke: var(--link-stroke-color);
+            stroke-width: 2px;
         }
-        & text.label {
-            font-family: "WantedSansVariable", sans-serif;
-            font-weight: 500;
-            font-size: 1.1rem;
-            text-anchor: middle;
-            fill: var(--label-color);
-            word-spacing: -0.2rem;
+        & g.node {
+            cursor: pointer;
+            & circle {
+                r: 1rem;
+                stroke: var(--node-stroke-color);
+                fill: aliceblue;
+            }
+            & text.label {
+                font-family: "WantedSansVariable", sans-serif;
+                font-weight: 500;
+                font-size: 1.3rem;
+                text-anchor: middle;
+                fill: var(--label-color);
+                word-spacing: -0.4rem;
+            }
         }
     }
 }
