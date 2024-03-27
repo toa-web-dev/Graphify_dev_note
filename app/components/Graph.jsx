@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import styles from "../style/Graph.module.scss";
+import setNodeColor from "../util/setNodeColor";
 import { spaceToUnderscore } from "../util/replaceEncodeUrl.js";
 
 //노드의 반지름을 attr로 부여, 다른 노드와 연결이 많은 노드 크기 증가, collide r은 적게
@@ -48,11 +49,12 @@ export default function Graph({ graphData }) {
             .data(nodes)
             .join("g")
             .each(function (d) {
-                d3.select(this).append("circle");
+                d3.select(this)
+                    .append("circle")
+                    .style("fill", (d) => setNodeColor(d.category));
                 d3.select(this).append("text").text(d.id);
             });
         node.on("click", clicked).call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
-        node.attr("class", "1232141");
 
         const simulation = d3
             .forceSimulation(nodes)
