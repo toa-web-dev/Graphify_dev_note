@@ -49,12 +49,17 @@ export default function Graph({ graphData }) {
             .data(nodes)
             .join("g")
             .each(function (d) {
-                d3.select(this)
+                const circle = d3
+                    .select(this)
                     .append("circle")
                     .style("fill", (d) => setNodeColor(d.category));
+                if (d.is_completed === true) {
+                    d3.select(this).on("click", clicked);
+                    circle.attr("class", `${styles.completed}`);
+                }
                 d3.select(this).append("text").text(d.id);
             });
-        node.on("click", clicked).call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
+        node.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
 
         const simulation = d3
             .forceSimulation(nodes)

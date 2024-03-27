@@ -9,13 +9,15 @@
         stroke-opacity: 0.6;
     }
     & circle {
-        cursor: pointer;
+        cursor: grab;
         r: 5;
-        stroke: var(--node-stroke-color);
-        stroke-width: 1.5;
-        // fill: rgb(255, 188, 63);
+        &.completed {
+            stroke: var(--node-stroke-color);
+            stroke-width: 1.5;
+        }
     }
     & text {
+        cursor: grab;
         stroke: var(--node-stroke-color);
         stroke-width: 0.1px;
         font-family: "WantedSansVariable", sans-serif;

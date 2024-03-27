@@ -23,7 +23,6 @@ export default async function Article({ params: { label } }) {
                     <Link href="/">← 뒤로가기</Link>
                 </div>
                 <article>
-                    {postData.is_completed ? null : <div>아직 작성중인 글입니다.</div>}
                     <h1 className={styles.title}>{postData.title}</h1>
                     <div className={styles.createdAt}>{postData.createdAt}</div>
                     <MarkdownRenderer
