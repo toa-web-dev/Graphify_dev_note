@@ -2,7 +2,7 @@ import styles from "./style/App.module.scss";
 import Graph from "./components/Graph.jsx";
 import { getGraphStructure } from "./util/getGraphStructure";
 export default async function app() {
-    const data = await getGraphStructure()
+    const data = await getGraphStructure();
     const Guide = () => (
         <div className={styles.guide}>
             <ul>
