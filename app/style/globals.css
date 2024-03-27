@@ -26,17 +26,16 @@
     box-sizing: border-box;
 }
 
-html,
+html {
+    font-size: 16px;
+}
+
 body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-}
-
-body {
-    font-size: 18px;
     background-color: var(--body-bg);
     font-family: "Noto Sans KR", sans-serif;
 }
