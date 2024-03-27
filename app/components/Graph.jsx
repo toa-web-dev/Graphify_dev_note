@@ -42,8 +42,17 @@ export default function Graph({ graphData }) {
         const link = container.append("g").selectAll("line").data(links).join("line");
 
         // 래퍼요소 g와 함께  노드 생성
-        const node = container.append("g").selectAll("circle").data(nodes).join("circle");
+        const node = container
+            .append("g")
+            .selectAll("g")
+            .data(nodes)
+            .join("g")
+            .each(function (d) {
+                d3.select(this).append("circle");
+                d3.select(this).append("text").text(d.id);
+            });
         node.on("click", clicked).call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
+        node.attr("class", "1232141");
 
         const simulation = d3
             .forceSimulation(nodes)
@@ -61,7 +70,12 @@ export default function Graph({ graphData }) {
                 .attr("y1", (d) => d.source.y)
                 .attr("x2", (d) => d.target.x)
                 .attr("y2", (d) => d.target.y);
-            node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+            node.select("circle")
+                .attr("cx", (d) => d.x)
+                .attr("cy", (d) => d.y);
+            node.select("text")
+                .attr("x", (d) => d.x)
+                .attr("y", (d) => d.y);
         });
 
         // *이벤트 선언
