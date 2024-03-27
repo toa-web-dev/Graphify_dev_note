@@ -15,11 +15,8 @@
 
 :root {
     --body-bg: #e7efeb;
-    --node-complete-color: #0cca6e;
-    --node-draft-color: rgb(255, 243, 110);
-    --node-pending-color: rgba(247, 247, 247, 0.995);
-    --node-stroke-color: gray;
-    --link-stroke-color:gray;
+    --node-stroke-color: #fff;
+    --link-stroke-color: #999;
     --label-color: black;
     --code-color: #f5f2f0;
     --post-title-size: 2.5rem;
@@ -29,17 +26,16 @@
     box-sizing: border-box;
 }
 
-html,
+html {
+    font-size: 16px;
+}
+
 body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-}
-
-body {
-    font-size: 18px;
     background-color: var(--body-bg);
     font-family: "Noto Sans KR", sans-serif;
 }
