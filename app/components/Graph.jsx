@@ -6,21 +6,26 @@ import * as d3 from "d3";
 import styles from "../style/Graph.module.scss";
 import { spaceToUnderscore } from "../util/replaceEncodeUrl.js";
 
-export default function Graph({ graphData }) {
-    const svgRef = useRef();
-    const router = useRouter();
-    useEffect(() => {
-        if (svgRef.current.children.length === 0) {
-            const graphProps = {
-                nodes: graphData.nodes,
-                links: graphData.links,
-                svgWidth: svgRef.current?.clientWidth,
-                svgHeight: svgRef.current?.clientHeight,
-            };
+//노드의 반지름을 attr로 부여, 다른 노드와 연결이 많은 노드 크기 증가, collide r은 적게
 
-            const { nodes, links, svgWidth, svgHeight } = graphProps;
-            const svg = d3.select(svgRef.current);
-            svg.call(
+export default function Graph({ graphData }) {
+    const svgRef = useRef(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        const graphProps = {
+            nodes: graphData.nodes,
+            links: graphData.links,
+            svgWidth: svgRef.current?.clientWidth,
+            svgHeight: svgRef.current?.clientHeight,
+        };
+        const { nodes, links, svgWidth, svgHeight } = graphProps;
+
+        const svg = d3
+            .select(svgRef.current)
+            .attr("viewBox", [-svgWidth / 2, -svgHeight / 2, svgWidth, svgHeight])
+            .attr("class", `${styles.svg_graph}`)
+            .call(
                 //확대/축소가 몇배인지 이벤트정보를 그래프컨트롤러에 상태로 전달해 조절가능하게 하기
                 d3
                     .zoom()
@@ -29,136 +34,64 @@ export default function Graph({ graphData }) {
                         container.attr("transform", e.transform);
                     })
             );
-            const container = svg.append("g").attr("class", `${styles.container}`);
-            const link = container.selectAll("line").data(links).join("line");
-            const node = container
-                .selectAll("g")
-                .data(nodes)
-                .join("g")
-                .attr("class", `${styles.node}`)
-                .each(function (d) {
-                    d3.select(this).append("circle").attr("r", 1);
-                    d3.select(this)
-                        .append("text")
-                        .attr("class", `${styles.label}`)
-                        .attr("y", 35)
-                        .text((d) => d.label);
-                });
 
-            node.on("click", function (event, d) {
-                const path = spaceToUnderscore(d.label);
-                router.push(`/post/${path}`);
-            });
-            node.call(
-                d3
-                    .drag() // 드래그 이벤트 설정
-                    .on("start", (event, d) => {
-                        if (!event.active) simulation.alphaTarget(0.3).restart();
-                        d.fx = d.x;
-                        d.fy = d.y;
-                    })
-                    .on("drag", (event, d) => {
-                        d.fx = event.x;
-                        d.fy = event.y;
-                    })
-                    .on("end", (event, d) => {
-                        if (!event.active) simulation.alphaTarget(0);
-                        d.fx = null;
-                        d.fy = null;
-                    })
-            );
+        //zoom()의 대상이 되는 래퍼요소 생성
+        const container = svg.append("g");
 
-            const simulation = d3
-                .forceSimulation(nodes)
-                .force(
-                    "link",
-                    d3.forceLink(links).id((d) => d.id)
-                )
-                .force("charge", d3.forceManyBody().strength(30))
-                .force("center", d3.forceCenter(svgWidth / 2, svgHeight / 2))
-                .force(
-                    "collide",
-                    d3.forceCollide().radius((d) => 50)
-                )
-                .on("tick", () => {
-                    link.attr("x1", (d) => d.source.x)
-                        .attr("y1", (d) => d.source.y)
-                        .attr("x2", (d) => d.target.x)
-                        .attr("y2", (d) => d.target.y);
-                    node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
-                    console.log("ticking")
-                });
+        // 래퍼요소 g와 함께 링크 생성
+        const link = container.append("g").selectAll("line").data(links).join("line");
+
+        // 래퍼요소 g와 함께  노드 생성
+        const node = container.append("g").selectAll("circle").data(nodes).join("circle");
+        node.on("click", clicked).call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
+
+        const simulation = d3
+            .forceSimulation(nodes)
+            .force(
+                "link",
+                d3.forceLink(links).id((d) => d.id)
+            )
+            .force("charge", d3.forceManyBody())
+            .force("x", d3.forceX())
+            .force("y", d3.forceY());
+
+        // Set the position attributes of links and nodes each time the simulation ticks.
+        simulation.on("tick", () => {
+            link.attr("x1", (d) => d.source.x)
+                .attr("y1", (d) => d.source.y)
+                .attr("x2", (d) => d.target.x)
+                .attr("y2", (d) => d.target.y);
+            node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+        });
+
+        // *이벤트 선언
+        function clicked(event, d) {
+            const path = spaceToUnderscore(d.label);
+            router.push(`/post/${path}`);
         }
-    }, [svgRef]);
+        // Reheat the simulation when drag starts, and fix the subject position.
+        function dragstarted(event) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            event.subject.fx = event.subject.x;
+            event.subject.fy = event.subject.y;
+        }
+        // Update the subject (dragged node) position during drag.
+        function dragged(event) {
+            event.subject.fx = event.x;
+            event.subject.fy = event.y;
+        }
+        // Restore the target alpha so the simulation cools after dragging ends.
+        // Unfix the subject position now that it’s no longer being dragged.
+        function dragended(event) {
+            if (!event.active) simulation.alphaTarget(0);
+            event.subject.fx = null;
+            event.subject.fy = null;
+        }
 
-    return <svg ref={svgRef} className={styles.svg_graph} />;
+        return () => {
+            svgRef.current = null;
+        };
+    }, [svgRef.current]);
+
+    return <svg ref={svgRef} />;
 }
-//
-
-//
-
-//     const container = svg.append("g");
-
-//     const link = container.selectAll("line").data(links).join("line");
-//     let circleStyle;
-//     const node = container
-//         .selectAll("g")
-//         .data(nodes)
-//         .join("g")
-//         .each(function (d) {
-//             if (d.isCompleted) circleStyle = `${styles.complete}`;
-//             else if (d.isCompleted === false) circleStyle = `${styles.draft}`;
-//             else circleStyle = `${styles.pending}`;
-
-//             d3.select(this).attr("class", `${styles.node}`);
-//             d3.select(this).append("circle").attr("class", circleStyle);
-//             d3.select(this)
-//                 .append("text")
-//                 .attr("class", `${styles.label}`)
-//                 .attr("y", 35)
-//                 .text((d) => d.label);
-//         });
-
-//     svg.call(
-//         //확대/축소가 몇배인지 이벤트정보를 그래프컨트롤러에 상태로 전달해 조절가능하게 하기
-//         d3
-//             .zoom()
-//             .scaleExtent([0.5, 1.5])
-//             .on("zoom", (e) => {
-//                 container.attr("transform", e.transform);
-//             })
-//     );
-
-//     node.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
-
-//     node.on("click", clicked);
-//     function clicked(event, d) {
-//         //게시글 제목을 URL로 할때 공백이 %20으로 변환되므로 공백을 _(언더바)로 변환하기
-//         const path = spaceToUnderscore(d.label);
-//         router.push(`/post/${path}`);
-//     }
-
-//     const svgWidth = svgRef.current.clientWidth;
-//     const svgHeight = svgRef.current.clientHeight;
-//     const simulation = d3
-//         .forceSimulation(nodes)
-//         .force(
-//             "link",
-//             d3.forceLink(links).id((d) => d.id)
-//             // .distance(100)
-//         )
-//         .force("charge", d3.forceManyBody().strength(-100))
-//         .force("center", d3.forceCenter(svgWidth / 2, svgHeight / 2))
-//         .force(
-//             "collide",
-//             d3.forceCollide().radius((d) => 1)
-//         )
-//         // .alphaDecay(ALPHA_DECAY)
-//         .on("tick", () => {
-//             link.attr("x1", (d) => d.source.x)
-//                 .attr("y1", (d) => d.source.y)
-//                 .attr("x2", (d) => d.target.x)
-//                 .attr("y2", (d) => d.target.y);
-//             node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
-//             console.log("tick");
-//         });
