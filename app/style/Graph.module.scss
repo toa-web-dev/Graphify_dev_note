@@ -3,26 +3,24 @@
     position: absolute;
     width: 100vw;
     height: 100vh;
-    & g.container {
-        & line {
-            stroke: var(--link-stroke-color);
-            stroke-width: 2px;
-        }
-        & g.node {
-            cursor: pointer;
-            & circle {
-                r: 1rem;
-                stroke: var(--node-stroke-color);
-                fill: aliceblue;
-            }
-            & text.label {
-                font-family: "WantedSansVariable", sans-serif;
-                font-weight: 500;
-                font-size: 1.3rem;
-                text-anchor: middle;
-                fill: var(--label-color);
-                word-spacing: -0.4rem;
-            }
-        }
+    & line {
+        stroke: var(--link-stroke-color);
+        stroke-width: 1.5;
+        stroke-opacity: 0.6;
+    }
+    & circle {
+        cursor: pointer;
+        r: 5;
+        stroke: var(--node-stroke-color);
+        stroke-width: 1.5;
+        fill: rgb(255, 188, 63);
+    }
+    & text {
+        font-family: "WantedSansVariable", sans-serif;
+        font-weight: 500;
+        font-size: 1rem;
+        text-anchor: middle;
+        fill: var(--label-color);
+        word-spacing: -0.4rem;
     }
 }

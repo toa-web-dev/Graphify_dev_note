@@ -15,11 +15,8 @@
 
 :root {
     --body-bg: #e7efeb;
-    --node-complete-color: #0cca6e;
-    --node-draft-color: rgb(255, 243, 110);
-    --node-pending-color: rgba(247, 247, 247, 0.995);
-    --node-stroke-color: gray;
-    --link-stroke-color:gray;
+    --node-stroke-color: #fff;
+    --link-stroke-color: #999;
     --label-color: black;
     --code-color: #f5f2f0;
     --post-title-size: 2.5rem;
