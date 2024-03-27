@@ -15,15 +15,21 @@
             stroke: var(--node-stroke-color);
             stroke-width: 1.5;
         }
+        &:not(.completed) {
+            filter: grayscale(0.5);
+            filter: brightness(0.85);
+        }
     }
     & text {
         cursor: grab;
-        stroke: var(--node-stroke-color);
-        stroke-width: 0.1px;
         font-family: "WantedSansVariable", sans-serif;
-        font-size: 0.5rem;
+        font-size: 0.4rem;
         text-anchor: middle;
         fill: var(--label-color);
         // word-spacing: -0.4rem;
+        &:not(.completed) {
+            font-size: 0.3rem;
+            fill: gray;
+        }
     }
 }

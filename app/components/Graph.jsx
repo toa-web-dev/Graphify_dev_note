@@ -53,11 +53,12 @@ export default function Graph({ graphData }) {
                     .select(this)
                     .append("circle")
                     .style("fill", (d) => setNodeColor(d.category));
+                const label = d3.select(this).append("text").text(d.id);
                 if (d.is_completed === true) {
                     d3.select(this).on("click", clicked);
                     circle.attr("class", `${styles.completed}`);
+                    label.attr("class", `${styles.completed}`);
                 }
-                d3.select(this).append("text").text(d.id);
             });
         node.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
 
@@ -82,7 +83,7 @@ export default function Graph({ graphData }) {
                 .attr("cy", (d) => d.y);
             node.select("text")
                 .attr("x", (d) => d.x)
-                .attr("y", (d) => d.y);
+                .attr("y", (d) => d.y - 6);
         });
 
         // *이벤트 선언
