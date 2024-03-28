@@ -1,0 +1,30 @@
+.guide {
+    position: fixed;
+    padding: 1rem;
+    font-size: 1.1rem;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 1rem;
+    color: var(--label-color);
+    text-wrap: nowrap;
+    line-height: 2rem;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    & h5{
+        margin-top: 0.5rem;
+    }
+
+    & ul {
+        list-style-type: none;
+    }
+
+    & ul:last-child li {
+        display: flex;
+        align-items: center;
+        .node {
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            margin-right: 0.5rem;
+        }
+    }
+}
