@@ -34,14 +34,14 @@
 <hr/>
 <br/>
 
-## 💎기술 스택과 사용 이유
+## 💎기술 스택
 
 | Next.js | React |  SCSS | D3.js | unified | supabase |
 | :----: |:----: |:----: | :----: |:----: |:----: |
 | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/fdfc0fcc-5185-4879-938f-cf095b670508" width="60" height="60"/> | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/0aa18d3e-4f03-43ec-8d25-677bf5cda86f" width="60" height="60"/> |  <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/db7bfd62-a83d-4869-b117-b9f31f29f110" width="60" height="60"/> |<img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/899f01d6-8f9f-4781-97c2-72e0bfd070e2" width="60" height="60"/> | <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/bc3dba67-c6c5-4185-9970-e100a7d66e72" width="60" height="60"/>| <img src="https://github.com/toa-web-dev/Graphify_dev_note/assets/85207564/350b34d9-94d2-4b07-9aba-902a66d2549d" width="60" height="60"/>
 |-|-|-| 그래프 라이브러리 |텍스트처리 라이브러리 |백엔드 DB 구축 |
 
-- 렌더링 속도를 개선하기 위해 `Next.js`로 SSR을 구현하여 성능을 향상했습니다. 
+- `Next.js`로 SSR을 구현하여 렌더링 성능을 향상했습니다. 
 - `D3.js` 를 사용해 프로젝트 목적에 적합한 네트워크 그래프를 렌더링하고 이벤트를 적용하여 인터랙션을 적용하였습니다.
 - `unified` 를 사용해 마크다운으로 작성된 텍스트를 DB에 저장하면, 클라이언트가 노드를 클릭해 게시글 페이지로 이동했을 때, 응답 받은  텍스트를 HTML로 변환하는 과정을 거쳐 페이지에 렌더링합니다.
 - `Supabase`로 데이터베이스를 구축하여 문서의 카테고리나 연결 대상 같은 여러 데이터를 유지보수하기 쉽게 하였습니다.
