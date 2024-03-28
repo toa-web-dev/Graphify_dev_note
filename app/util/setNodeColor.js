@@ -1,14 +1,18 @@
+/**
+ * @param {string} category
+ * @returns string
+ */
 export default function setNodeColor(category) {
-    let mainCategory = "";
-    let color = "gray";
-    if (category !== null) mainCategory = category[0];
-
-    switch (mainCategory) {
+    let color = "";
+    switch (category) {
         case "Javascript":
             color = "#F7DF1E";
             break;
         case "React":
-            color = "#1f77b4";
+            color = "#61DAFB";
+            break;
+        case "Next.js":
+            color = "#000000";
             break;
         default:
             color = "#DDDDDD";
