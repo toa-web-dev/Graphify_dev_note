@@ -52,7 +52,10 @@ export default function Graph({ graphData }) {
                 const circle = d3
                     .select(this)
                     .append("circle")
-                    .style("fill", (d) => setNodeColor(d.category));
+                    .style("fill", (d) => {
+                        const category = Array.isArray(d.category) ? d.category[0] : d.category;
+                        return setNodeColor(category);
+                    });
                 const label = d3.select(this).append("text").text(d.id);
                 if (d.is_completed === true) {
                     d3.select(this).on("click", clicked);
