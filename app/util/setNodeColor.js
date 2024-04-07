@@ -14,6 +14,9 @@ export default function setNodeColor(category) {
         case "Next.js":
             color = "#000000";
             break;
+        case "CSS":
+            color = "#264de4";
+            break;
         default:
             color = "#DDDDDD";
             break;
