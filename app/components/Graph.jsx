@@ -49,18 +49,23 @@ export default function Graph({ graphData }) {
             .data(nodes)
             .join("g")
             .each(function (d) {
-                const circle = d3
-                    .select(this)
-                    .append("circle")
-                    .style("fill", (d) => {
+                const circle = d3.select(this).append("circle");
+                const label = d3.select(this).append("text").text(d.id);
+
+                if (d.is_completed === true) {
+                    d3.select(this).on("click", clicked);
+                    circle
+                        .style("fill", (d) => {
+                            const category = Array.isArray(d.category) ? d.category[0] : d.category;
+                            return setNodeColor(category);
+                        })
+                        .attr("class", `${styles.completed}`);
+                    label.attr("class", `${styles.completed}`);
+                } else {
+                    circle.style("stroke", (d) => {
                         const category = Array.isArray(d.category) ? d.category[0] : d.category;
                         return setNodeColor(category);
                     });
-                const label = d3.select(this).append("text").text(d.id);
-                if (d.is_completed === true) {
-                    d3.select(this).on("click", clicked);
-                    circle.attr("class", `${styles.completed}`);
-                    label.attr("class", `${styles.completed}`);
                 }
             });
         node.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));

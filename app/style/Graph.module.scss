@@ -5,31 +5,30 @@
     height: 100vh;
     & line {
         stroke: var(--link-stroke-color);
-        stroke-width: 1.5;
-        stroke-opacity: 0.6;
+        stroke-width: 1;
     }
+
     & circle {
         cursor: grab;
         r: 5;
-        &.completed {
-            stroke: var(--node-stroke-color);
-            stroke-width: 1.5;
-        }
         &:not(.completed) {
-            filter: grayscale(0.5);
-            filter: brightness(0.85);
+            fill: var(--body-bg);
+            stroke-width: 0.8;
+            stroke-dasharray: (1.5, 0.6);
+            filter: grayscale(0.3);
         }
     }
+
     & text {
         cursor: grab;
         font-family: "WantedSansVariable", sans-serif;
-        font-size: 0.4rem;
+        font-size: 0.3rem;
         text-anchor: middle;
         fill: var(--label-color);
-        // word-spacing: -0.4rem;
+        word-spacing: -1px;
         &:not(.completed) {
-            font-size: 0.3rem;
-            fill: gray;
+            font-size: 0.25rem;
+            fill: rgb(99, 99, 99);
         }
     }
 }
